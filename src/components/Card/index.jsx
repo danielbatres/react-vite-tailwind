@@ -6,12 +6,25 @@ const Card = ({ data }) => {
   const {
     setCounter,
     openProductDetail,
-    setProductDetail
+    setProductDetail,
+    cartProducts,
+    setCartProducts
   } = useContext(ShoppingCartContext);
 
   const showProduct = () => {
     setProductDetail(data);
     openProductDetail();
+  }
+
+  const addProductToCart = e => {
+    e.stopPropagation();
+    setCounter((prev) => prev + 1);
+
+    const newProducts = [...cartProducts];
+    newProducts.push(data);
+
+    setCartProducts(newProducts);
+    console.log(cartProducts);
   }
 
   return (
@@ -28,11 +41,8 @@ const Card = ({ data }) => {
           src={data.images[0]}
           alt={data.title}
         />
-        <div className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1" onClick={e => {
-          e.stopPropagation();
-          setCounter(prev => prev + 1);
-        }}>
-          <PlusIcon className="w-6 h-6 text-black"></PlusIcon>
+        <div className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1" onClick={e => addProductToCart(e)}>
+          <PlusIcon className="w-6 h-6 text-black" />
         </div>
       </figure>
       <p className="flex justify-between">

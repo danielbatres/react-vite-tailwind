@@ -22,7 +22,7 @@ const ProductDetail = () => {
       <figure>
         <img
           className="w-full h-hull rounded-lg"
-          src={productDetail.images[0]}
+          src={productDetail.images}
           alt={productDetail.title}
         />
       </figure>

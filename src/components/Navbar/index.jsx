@@ -1,8 +1,10 @@
+import { ShoppingCartContext } from "../../Context";
 import { NavItem } from "../NavItem";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState(1);
+  const { counter } = useContext(ShoppingCartContext);
 
   const firstMenu = [
     { to: "/", link: "Shopi" },
@@ -54,6 +56,9 @@ const Navbar = () => {
             />
           )
         })}
+        <li>
+          {counter}
+        </li>
       </ul>
     </nav>
   );

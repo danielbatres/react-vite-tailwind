@@ -1,3 +1,4 @@
+import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 import { ShoppingCartContext } from "../../Context";
 import { NavItem } from "../NavItem";
 import { useContext, useState } from "react";
@@ -56,7 +57,8 @@ const Navbar = () => {
             />
           )
         })}
-        <li>
+        <li className="flex items-center">
+          <ShoppingBagIcon className="w-6 h-6"/>
           {counter}
         </li>
       </ul>

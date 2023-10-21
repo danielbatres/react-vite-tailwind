@@ -6,8 +6,7 @@ import { useContext, useState } from "react";
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState(1);
   const { 
-    counter,
-    openProductDetail
+    counter
   } = useContext(ShoppingCartContext);
 
   const firstMenu = [
@@ -61,7 +60,7 @@ const Navbar = () => {
           )
         })}
         <li className="flex items-center">
-          <ShoppingBagIcon className="w-6 h-6" onClick={() => openProductDetail()}/>
+          <ShoppingBagIcon className="w-6 h-6"/>
           {counter}
         </li>
       </ul>

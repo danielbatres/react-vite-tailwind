@@ -1,10 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Card } from "../../components/Card"
 import { apiUrl } from '../../api';
 import { ProductDetail } from '../../components/ProductDetail';
+import { ShoppingCartContext } from '../../Context';
 
 function Home() {
   const [items, setItems] = useState([]);
+
+  const {
+    isProductDetailOpen
+  } = useContext(ShoppingCartContext);
 
   useEffect(() => {
     (async () => {
@@ -14,8 +19,6 @@ function Home() {
         if (response.status !== 200) return;
 
         const data = await response.json();
-
-        console.log(data);
 
         setItems(data); 
       } catch (error) {
@@ -31,7 +34,7 @@ function Home() {
           <Card key={item.id} data={item} />
         ))}
       </div>
-      <ProductDetail />
+      {isProductDetailOpen && <ProductDetail />}
     </>
   );
 }

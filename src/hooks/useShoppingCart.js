@@ -10,7 +10,9 @@ const useShoppingCart = () => {
     setCounter,
     openProductDetail,
     closeProductDetail,
-    setProductDetail
+    setProductDetail,
+    order,
+    setOrder
   } = useContext(ShoppingCartContext);
 
   const handleDelete = id => {
@@ -18,6 +20,19 @@ const useShoppingCart = () => {
 
     setCartProducts(filteredProducts);
     setCounter(prev => prev -= 1);
+  }
+  
+  const handleCheckout = () => {
+    const orderToAdd = {
+      date: '01.02.23',
+      products: cartProducts,
+      totalProducts: cartProducts.length,
+      totalPrice: getTotalPrice(cartProducts)
+    }
+
+    setOrder([...order, orderToAdd]);
+    setCartProducts([]);
+    setCounter(0);
   }
 
   const showProduct = data => {
@@ -44,6 +59,7 @@ const useShoppingCart = () => {
   
   return {
     handleDelete,
+    handleCheckout,
     showProduct,
     addProductToCart,
     cartProducts,

@@ -6,18 +6,22 @@ const Card = ({ data }) => {
   const {
     setCounter,
     openProductDetail,
+    closeProductDetail,
     setProductDetail,
     cartProducts,
-    setCartProducts
+    setCartProducts,
+    openCheckoutSideMenu,
+    closeCheckoutSideMenu
   } = useContext(ShoppingCartContext);
 
   const showProduct = () => {
     setProductDetail(data);
     openProductDetail();
+    closeCheckoutSideMenu();
   }
 
-  const addProductToCart = e => {
-    e.stopPropagation();
+  const addProductToCart = event => {
+    event.stopPropagation();
     setCounter((prev) => prev + 1);
 
     const newProducts = [...cartProducts];
@@ -25,6 +29,8 @@ const Card = ({ data }) => {
 
     setCartProducts(newProducts);
     console.log(cartProducts);
+    closeProductDetail();
+    openCheckoutSideMenu();
   }
 
   return (

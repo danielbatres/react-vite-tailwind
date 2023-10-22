@@ -1,4 +1,5 @@
 import { XMarkIcon } from "@heroicons/react/24/solid"
+import { useShoppingCart } from "../../hooks/useShoppingCart";
 
 const OrderCard = props => {
   const { 
@@ -7,6 +8,8 @@ const OrderCard = props => {
     image,
     price
   } = props;
+
+  const { handleDelete } = useShoppingCart();
 
   return (
     <div className="flex justify-between items-center">
@@ -20,6 +23,7 @@ const OrderCard = props => {
         <p className="text-lg font-medium">{price}</p>
         <XMarkIcon
           className="h-6 w-6 text-black cursor-pointer"
+          onClick={() => handleDelete(id)}
         />
       </div>
     </div>

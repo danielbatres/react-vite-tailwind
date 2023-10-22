@@ -1,37 +1,12 @@
-import { useContext } from "react";
-import { ShoppingCartContext } from "../../Context";
 import { CheckIcon, PlusIcon } from "@heroicons/react/24/solid";
+import { useShoppingCart } from "../../hooks/useShoppingCart";
 
 const Card = ({ data }) => {
   const {
-    setCounter,
-    openProductDetail,
-    closeProductDetail,
-    setProductDetail,
     cartProducts,
-    setCartProducts,
-    openCheckoutSideMenu,
-    closeCheckoutSideMenu
-  } = useContext(ShoppingCartContext);
-
-  const showProduct = () => {
-    setProductDetail(data);
-    openProductDetail();
-    closeCheckoutSideMenu();
-  }
-
-  const addProductToCart = event => {
-    event.stopPropagation();
-    setCounter((prev) => prev + 1);
-
-    const newProducts = [...cartProducts];
-    newProducts.push(data);
-
-    setCartProducts(newProducts);
-    console.log(cartProducts);
-    closeProductDetail();
-    openCheckoutSideMenu();
-  }
+    addProductToCart,
+    showProduct
+  } = useShoppingCart();
 
   const renderIcon = () => {
     const isInCart = cartProducts.filter(product => product.id === data.id).length > 0;
@@ -50,7 +25,7 @@ const Card = ({ data }) => {
       return (
         <div
         className={`${commonClasses} bg-white`}
-        onClick={(e) => addProductToCart(e)}
+        onClick={(e) => addProductToCart(e, data)}
       >
         <PlusIcon className="h-6 w-6 text-black"/>
       </div>
@@ -61,7 +36,7 @@ const Card = ({ data }) => {
   return (
     <div 
       className="bg-white cursor-pointer w-56 h-60 rounded-lg"
-      onClick={() => showProduct()}
+      onClick={() => showProduct(data)}
     >
       <figure className="relative mb-2 w-full h-4/5">
         <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">

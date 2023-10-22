@@ -10,7 +10,7 @@ const useShoppingCart = () => {
     setCounter,
     openProductDetail,
     closeProductDetail,
-    setProductDetail,
+    setProductDetail
   } = useContext(ShoppingCartContext);
 
   const handleDelete = id => {
@@ -34,16 +34,20 @@ const useShoppingCart = () => {
     newProducts.push(data);
 
     setCartProducts(newProducts);
-    console.log(cartProducts);
     closeProductDetail();
     openCheckoutSideMenu();
+  };
+
+  const getTotalPrice = (products) => {
+    return products.reduce((sum, product) => sum + product.price, 0);
   };
   
   return {
     handleDelete,
     showProduct,
     addProductToCart,
-    cartProducts
+    cartProducts,
+    getTotalPrice
   }  
 }
 

@@ -3,6 +3,7 @@ import { ShoppingCartContext } from "../../Context"
 import { Aside } from "../Aside";
 import { OrderCard } from "../OrderCard";
 import { useShoppingCart } from "../../hooks/useShoppingCart";
+import { Link } from "react-router-dom";
 
 const CheckoutSideMenu = () => {
   const {
@@ -13,7 +14,8 @@ const CheckoutSideMenu = () => {
 
   const { 
     getTotalPrice,
-    handleCheckout
+    handleCheckout,
+    handleDelete
   } = useShoppingCart();
 
   return (
@@ -30,6 +32,7 @@ const CheckoutSideMenu = () => {
             title={product.title}
             image={product.images}
             price={product.price}
+            onDelete={id => handleDelete(id)}
           />
         ))}
       </div>
@@ -38,12 +41,15 @@ const CheckoutSideMenu = () => {
           <span className="font-light">Total:</span>
           <span className="font-medium text-2xl">{getTotalPrice(cartProducts)}</span>
         </p>
-        <button
-          className="bg-black py-3 text-white w-full rounded-lg"
-          onClick={() => handleCheckout()}
-        >
-          Checkout
-        </button>
+        <Link to="/my-orders/last">
+          <button
+            className="bg-black py-3 text-white w-full rounded-lg"
+            onClick={() => handleCheckout()}
+            type="button"
+          >
+            Checkout
+          </button>
+        </Link>
       </div>
     </Aside>
   );

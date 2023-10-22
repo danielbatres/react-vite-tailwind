@@ -6,10 +6,9 @@ const OrderCard = props => {
     id,
     title,
     image,
-    price
+    price,
+    onDelete
   } = props;
-
-  const { handleDelete } = useShoppingCart();
 
   return (
     <div className="flex justify-between items-center">
@@ -21,10 +20,10 @@ const OrderCard = props => {
       </div>
       <div className="flex items-center gap-2">
         <p className="text-lg font-medium">{price}</p>
-        <XMarkIcon
+        {onDelete && <XMarkIcon
           className="h-6 w-6 text-black cursor-pointer"
-          onClick={() => handleDelete(id)}
-        />
+          onClick={() => onDelete(id)}
+        />}
       </div>
     </div>
   )

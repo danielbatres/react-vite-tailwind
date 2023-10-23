@@ -7,7 +7,8 @@ const Navbar = () => {
   const [activeLink, setActiveLink] = useState(1);
   const { 
     counter,
-    updateCategoryPath
+    updateCategoryPath,
+    setSearchValue
   } = useContext(ShoppingCartContext);
 
   const firstMenu = [
@@ -33,6 +34,7 @@ const Navbar = () => {
   const handleLinkCategory = index => {
     handleLinkClick(index);
     updateCategoryPath(firstMenu[index].to);
+    setSearchValue("");
   }
 
   return (

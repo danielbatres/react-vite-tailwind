@@ -15,7 +15,7 @@ const NavItem = (props) => {
     >
       <NavLink
         to={to}
-        className={isActive ? "underline underline-offset" : undefined}
+        className={isActive && index !== 0 ? "underline underline-offset" : undefined}
       >
         {link}
       </NavLink>

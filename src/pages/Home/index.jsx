@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Card } from "../../components/Card";
 import { ProductDetail } from "../../components/ProductDetail";
 import { ShoppingCartContext } from "../../Context";
 
 function Home() {
   const { 
+    searchValue,
     setSearchValue,
     filteredItems,
     updateCategoryPath
@@ -20,6 +21,7 @@ function Home() {
         <h1 className="font-medium text-xl">Exclusive Products</h1>
       </div>
       <input 
+        value={searchValue}
         type="text" 
         placeholder="Search a product"
         className="rounded-lg border border-black w-80 p-4 mb-4 focus:outline-none"

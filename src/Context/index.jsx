@@ -1,4 +1,5 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
+import { apiUrl } from '../api';
 
 export const ShoppingCartContext = createContext()
 
@@ -20,6 +21,25 @@ export const ShoppingCartProvider = ({ children }) => {
   const openCheckoutSideMenu = () => setIsCheckoutSideMenu(true);
   const closeCheckoutSideMenu = () => setIsCheckoutSideMenu(false);
 
+  const [items, setItems] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch(apiUrl);
+
+        if (response.status !== 200) return;
+
+        const data = await response.json();
+
+        setItems(data); 
+      } catch (error) {
+        console.log("An error has ocurred");
+      }
+    })()
+  }, []);
+
   return (
     <ShoppingCartContext.Provider value={{
       counter,
@@ -35,7 +55,11 @@ export const ShoppingCartProvider = ({ children }) => {
       openCheckoutSideMenu,
       closeCheckoutSideMenu,
       order,
-      setOrder
+      setOrder,
+      items,
+      setItems,
+      searchValue,
+      setSearchValue
     }}>
       {children}
     </ShoppingCartContext.Provider>

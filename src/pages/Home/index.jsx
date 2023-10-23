@@ -1,29 +1,27 @@
-import { useEffect, useState } from 'react'
-import { Card } from "../../components/Card"
-import { apiUrl } from '../../api';
-import { ProductDetail } from '../../components/ProductDetail';
+import { useContext } from "react";
+import { Card } from "../../components/Card";
+import { ProductDetail } from "../../components/ProductDetail";
+import { ShoppingCartContext } from "../../Context";
 
 function Home() {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch(apiUrl);
-
-        if (response.status !== 200) return;
-
-        const data = await response.json();
-
-        setItems(data); 
-      } catch (error) {
-        console.log("An error has ocurred");
-      }
-    })()
-  }, []);
+  const { 
+    items,
+    setSearchValue
+  } = useContext(ShoppingCartContext);
 
   return (
     <>
+      <div className="mb-4">
+        <h1 className="font-medium text-xl">Exclusive Products</h1>
+      </div>
+      <input 
+        type="text" 
+        placeholder="Search a product"
+        className="rounded-lg border border-black w-80 p-4 mb-4 focus:outline-none"
+        onChange={event => {
+          setSearchValue(event.target.value);
+        }}
+      />
       <div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
         {items?.map((item) => (
           <Card key={item.id} data={item} />
@@ -34,4 +32,4 @@ function Home() {
   );
 }
 
-export { Home }
+export { Home };

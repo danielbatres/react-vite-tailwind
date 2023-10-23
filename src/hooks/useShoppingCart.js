@@ -23,8 +23,10 @@ const useShoppingCart = () => {
   }
   
   const handleCheckout = () => {
+    const date = new Date();
+
     const orderToAdd = {
-      date: '01.02.23',
+      date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
       products: cartProducts,
       totalProducts: cartProducts.length,
       totalPrice: getTotalPrice(cartProducts)

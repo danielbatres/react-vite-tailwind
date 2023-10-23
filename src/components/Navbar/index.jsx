@@ -14,11 +14,10 @@ const Navbar = () => {
   const firstMenu = [
     { to: "/", link: "Shopi" },
     { to: "/", link: "All" },
-    { to: "/clothes", link: "Clothes" },
     { to: "/electronics", link: "Electronics" },
-    { to: "/furniture", link: "Furnitures" },
-    { to: "/toys", link: "Toys" },
-    { to: "/others", link: "Others" },
+    { to: "/jewelery", link: "Jewelery" },
+    { to: "/men", link: "Men's clothings" },
+    { to: "/women", link: "Women's Clothing" },
   ];
 
   const secondMenu = [

@@ -11,7 +11,7 @@ export const ShoppingCartProvider = ({ children }) => {
     title: "",
     price: "",
     description: "",
-    images: []
+    image: ""
   });
   const [cartProducts, setCartProducts] = useState([]);
   const [order, setOrder] = useState([]);
@@ -44,7 +44,7 @@ export const ShoppingCartProvider = ({ children }) => {
 
   const filteredItemsByTitle = () => {
     let condition = item => item.title.toLowerCase().includes(searchValue.toLowerCase());
-    let categoryCondition = item => item.category.name.toLowerCase() === searchCategory?.toLowerCase();
+    let categoryCondition = item => item.category.toLowerCase().includes(searchCategory?.toLowerCase());
     
     return items?.filter(item => searchCategory === "" ? condition(item) : condition(item) && categoryCondition(item));
   }

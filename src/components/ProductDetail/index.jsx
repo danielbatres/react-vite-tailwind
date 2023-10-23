@@ -14,7 +14,7 @@ const ProductDetail = () => {
       <figure>
         <img
           className="w-full h-hull rounded-lg"
-          src={productDetail.images}
+          src={productDetail.image}
           alt={productDetail.title}
         />
       </figure>

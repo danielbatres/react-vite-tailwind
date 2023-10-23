@@ -14,7 +14,7 @@ const Navbar = () => {
     { to: "/", link: "All" },
     { to: "/clothes", link: "Clothes" },
     { to: "/electronics", link: "Electronics" },
-    { to: "/furnitures", link: "Furnitures" },
+    { to: "/furniture", link: "Furnitures" },
     { to: "/toys", link: "Toys" },
     { to: "/others", link: "Others" },
   ];

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Card } from "../../components/Card";
 import { ProductDetail } from "../../components/ProductDetail";
 import { ShoppingCartContext } from "../../Context";
@@ -6,8 +6,16 @@ import { ShoppingCartContext } from "../../Context";
 function Home() {
   const { 
     setSearchValue,
-    filteredItems
+    filteredItems,
+    setSearchCategory
   } = useContext(ShoppingCartContext);
+
+  useEffect(() => {
+    const currentPath = window.location.pathname;
+    const categoryPath = currentPath.substring(1);
+
+    setSearchCategory(categoryPath);
+  }, []);
 
   return (
     <>

@@ -15,7 +15,7 @@ const Navbar = () => {
 
   const {
     account,
-    logout,
+    signOut,
     isEmptyAccount
   } = useLocalStorage();
 
@@ -59,7 +59,7 @@ const Navbar = () => {
       </ul>
       <ul className="flex items-center gap-3">
         <li className="text-black/60">{account?.email}</li>
-        {secondMenu.map((menuItem, index) => {
+        {!isEmptyAccount() && secondMenu.map((menuItem, index) => {
           let newIndex = index + firstMenu.length;
 
           return (
@@ -82,7 +82,7 @@ const Navbar = () => {
               </Link> 
             : <Link 
                 to="/" 
-                onClick={() => logout()}
+                onClick={() => signOut()}
               >
                 Sign out
               </Link>

@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 function useLocalStorage() {
   const [account, setAccount] = useState({});
+  
+  const item = "ACCOUNT";
 
   useEffect(() => {
-    const item = "ACCOUNT";
-
     const accountStorage = localStorage.getItem(item);
 
     if (accountStorage !== null) {
@@ -15,13 +15,13 @@ function useLocalStorage() {
     }
   }, []);
 
-  const login = newAccount => {
+  const signIn = newAccount => {
     localStorage.setItem(item, JSON.stringify(newAccount));
 
     setAccount(newAccount);
   }
 
-  const logout = () => {
+  const signOut = () => {
     localStorage.setItem(item, JSON.stringify({}));
 
     setAccount({});
@@ -31,8 +31,8 @@ function useLocalStorage() {
   
   return {
     account,
-    login,
-    logout,
+    signIn,
+    signOut,
     isEmptyAccount
   }
 }

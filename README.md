@@ -6,7 +6,7 @@ A simple ecommerce web application created with React, Vite.js, and Tailwind CSS
 
 ## Deployment
 
-You can access the deployed application [here](ecommerce-react-vite-application.netlify.app).
+You can access the deployed application [here](https://ecommerce-react-vite-application.netlify.app).
 
 ## License
 

@@ -5,8 +5,6 @@ function SignIn() {
     account 
   } = useLocalStorage();
 
-  console.log(account);
-
   return (
     <>
 

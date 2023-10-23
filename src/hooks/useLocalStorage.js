@@ -26,11 +26,14 @@ function useLocalStorage() {
 
     setAccount({});
   }
+
+  const isEmptyAccount = () => Object.keys(account).length === 0;
   
   return {
     account,
     login,
-    logout
+    logout,
+    isEmptyAccount
   }
 }
 

@@ -2,6 +2,8 @@ import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 import { ShoppingCartContext } from "../../Context";
 import { NavItem } from "../NavItem";
 import { useContext, useState } from "react";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState(1);
@@ -10,6 +12,12 @@ const Navbar = () => {
     updateCategoryPath,
     setSearchValue
   } = useContext(ShoppingCartContext);
+
+  const {
+    account,
+    logout,
+    isEmptyAccount
+  } = useLocalStorage();
 
   const firstMenu = [
     { to: "/", link: "Shopi" },
@@ -22,8 +30,7 @@ const Navbar = () => {
 
   const secondMenu = [
     { to: "/my-orders", link: "My orders" },
-    { to: "/my-account", link: "My Account" },
-    { to: "/sign-in", link: "Sign In" },
+    { to: "/my-account", link: "My Account" }
   ];
 
   const handleLinkClick = index => {
@@ -51,7 +58,7 @@ const Navbar = () => {
         ))}
       </ul>
       <ul className="flex items-center gap-3">
-        <li className="text-black/60">batres@email.com</li>
+        <li className="text-black/60">{account?.email}</li>
         {secondMenu.map((menuItem, index) => {
           let newIndex = index + firstMenu.length;
 
@@ -66,6 +73,21 @@ const Navbar = () => {
             />
           )
         })}
+        <li className="cursor-pointer">
+          {isEmptyAccount() 
+            ? <Link 
+                to="/sign-in"
+              >
+                Sign in
+              </Link> 
+            : <Link 
+                to="/" 
+                onClick={() => logout()}
+              >
+                Sign out
+              </Link>
+          }
+        </li>
         <li className="flex items-center">
           <ShoppingBagIcon className="w-6 h-6"/>
           {counter}

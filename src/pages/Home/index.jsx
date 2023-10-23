@@ -5,8 +5,8 @@ import { ShoppingCartContext } from "../../Context";
 
 function Home() {
   const { 
-    items,
-    setSearchValue
+    setSearchValue,
+    filteredItems
   } = useContext(ShoppingCartContext);
 
   return (
@@ -18,14 +18,13 @@ function Home() {
         type="text" 
         placeholder="Search a product"
         className="rounded-lg border border-black w-80 p-4 mb-4 focus:outline-none"
-        onChange={event => {
-          setSearchValue(event.target.value);
-        }}
+        onChange={event => setSearchValue(event.target.value)}
       />
       <div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
-        {items?.map((item) => (
+        {filteredItems?.map((item) => (
           <Card key={item.id} data={item} />
         ))}
+        {filteredItems.length === 0 && <p>No products</p>}
       </div>
       <ProductDetail />
     </>

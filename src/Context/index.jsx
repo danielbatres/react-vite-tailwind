@@ -21,9 +21,6 @@ export const ShoppingCartProvider = ({ children }) => {
   const openCheckoutSideMenu = () => setIsCheckoutSideMenu(true);
   const closeCheckoutSideMenu = () => setIsCheckoutSideMenu(false);
 
-  const [items, setItems] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
-
   useEffect(() => {
     (async () => {
       try {
@@ -33,12 +30,24 @@ export const ShoppingCartProvider = ({ children }) => {
 
         const data = await response.json();
 
-        setItems(data); 
+        setItems(data);
       } catch (error) {
         console.log("An error has ocurred");
       }
     })()
   }, []);
+
+  const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+
+  const filteredItemsByTitle = (items, searchByTitle) => {
+    return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()));
+  }
+
+  useEffect(() => {
+    setFilteredItems(filteredItemsByTitle(items, searchValue))
+  }, [items, searchValue]);
 
   return (
     <ShoppingCartContext.Provider value={{
@@ -59,7 +68,10 @@ export const ShoppingCartProvider = ({ children }) => {
       items,
       setItems,
       searchValue,
-      setSearchValue
+      setSearchValue,
+      filteredItems,
+      setFilteredItems,
+      filteredItemsByTitle
     }}>
       {children}
     </ShoppingCartContext.Provider>

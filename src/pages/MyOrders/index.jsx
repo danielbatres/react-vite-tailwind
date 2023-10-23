@@ -9,6 +9,9 @@ function MyOrders() {
 
   return (
     <>
+      <div className="mb-4">
+        <h1 className="font-medium text-xl">My orders</h1>
+      </div>
       {order.map((order, index) => (
         <Link 
           key={index}

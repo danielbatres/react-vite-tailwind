@@ -12,7 +12,7 @@ function MyOrders() {
       {order.map((order, index) => (
         <Link 
           key={index}
-          to={`/my-orders/${order.id}`}
+          to={`/my-orders/${index}`}
         >
           <OrdersCard
             totalPrice={order.totalPrice}

@@ -53,6 +53,12 @@ export const ShoppingCartProvider = ({ children }) => {
     setFilteredItems(filteredItemsByTitle())
   }, [items, searchValue, searchCategory]);
 
+  const updateCategoryPath = categoryPath => {
+    const category = categoryPath.substring(1);
+
+    setSearchCategory(category);
+  }
+
   return (
     <ShoppingCartContext.Provider value={{
       counter,
@@ -77,7 +83,8 @@ export const ShoppingCartProvider = ({ children }) => {
       setFilteredItems,
       filteredItemsByTitle,
       searchCategory,
-      setSearchCategory
+      setSearchCategory,
+      updateCategoryPath
     }}>
       {children}
     </ShoppingCartContext.Provider>

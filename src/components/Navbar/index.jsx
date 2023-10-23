@@ -6,7 +6,8 @@ import { useContext, useState } from "react";
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState(1);
   const { 
-    counter
+    counter,
+    updateCategoryPath
   } = useContext(ShoppingCartContext);
 
   const firstMenu = [
@@ -29,6 +30,11 @@ const Navbar = () => {
     setActiveLink(index);
   }
 
+  const handleLinkCategory = index => {
+    handleLinkClick(index);
+    updateCategoryPath(firstMenu[index].to);
+  }
+
   return (
     <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light bg-white">
       <ul className="flex items-center gap-3">
@@ -39,7 +45,7 @@ const Navbar = () => {
             link={menuItem.link}
             index={index}
             isActive={activeLink === index}
-            onSelection={() => handleLinkClick(index)}
+            onSelection={() => handleLinkCategory(index)}
           />
         ))}
       </ul>

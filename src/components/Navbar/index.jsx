@@ -7,17 +7,14 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState(1);
-  const { 
+  const {
     counter,
     updateCategoryPath,
-    setSearchValue
-  } = useContext(ShoppingCartContext);
-
-  const {
+    setSearchValue,
     account,
     signOut,
-    isEmptyAccount
-  } = useLocalStorage();
+    isSignIn,
+  } = useContext(ShoppingCartContext);
 
   const firstMenu = [
     { to: "/", link: "Shopi" },
@@ -59,7 +56,7 @@ const Navbar = () => {
       </ul>
       <ul className="flex items-center gap-3">
         <li className="text-black/60">{account?.email}</li>
-        {!isEmptyAccount() && secondMenu.map((menuItem, index) => {
+        {isSignIn && secondMenu.map((menuItem, index) => {
           let newIndex = index + firstMenu.length;
 
           return (
@@ -74,7 +71,7 @@ const Navbar = () => {
           )
         })}
         <li className="cursor-pointer">
-          {isEmptyAccount() 
+          {!isSignIn 
             ? <Link 
                 to="/sign-in"
               >

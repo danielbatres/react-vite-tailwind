@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 function useLocalStorage() {
   const [account, setAccount] = useState({});
+  const [isSignIn, setIsSignIn] = useState(false);
   
   const item = "ACCOUNT";
 
@@ -10,6 +11,7 @@ function useLocalStorage() {
 
     if (accountStorage !== null) {
       setAccount(JSON.parse(accountStorage));
+      setIsSignIn(true);
     } else {
       localStorage.setItem(item, JSON.stringify(account));
     }
@@ -19,21 +21,23 @@ function useLocalStorage() {
     localStorage.setItem(item, JSON.stringify(newAccount));
 
     setAccount(newAccount);
+    setIsSignIn(true);
+
+    console.log(account, isSignIn);
   }
 
   const signOut = () => {
     localStorage.setItem(item, JSON.stringify({}));
 
     setAccount({});
+    setIsSignIn(false);
   }
 
-  const isEmptyAccount = () => Object.keys(account).length === 0;
-  
   return {
     account,
     signIn,
     signOut,
-    isEmptyAccount
+    isSignIn
   }
 }
 

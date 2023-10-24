@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
 import { apiUrl } from '../api';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 export const ShoppingCartContext = createContext()
 
@@ -59,6 +60,13 @@ export const ShoppingCartProvider = ({ children }) => {
     setSearchCategory(category);
   }
 
+  const {
+    account,
+    signIn,
+    signOut,
+    isSignIn
+  } = useLocalStorage();
+
   return (
     <ShoppingCartContext.Provider value={{
       counter,
@@ -84,7 +92,11 @@ export const ShoppingCartProvider = ({ children }) => {
       filteredItemsByTitle,
       searchCategory,
       setSearchCategory,
-      updateCategoryPath
+      updateCategoryPath,
+      account,
+      signIn,
+      signOut,
+      isSignIn
     }}>
       {children}
     </ShoppingCartContext.Provider>

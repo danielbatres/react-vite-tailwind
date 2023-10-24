@@ -22,8 +22,6 @@ function useLocalStorage() {
 
     setAccount(newAccount);
     setIsSignIn(true);
-
-    console.log(account, isSignIn);
   }
 
   const signOut = () => {

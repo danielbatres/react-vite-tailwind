@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 
 function useLocalStorage() {
   const [account, setAccount] = useState({});
@@ -17,11 +18,13 @@ function useLocalStorage() {
     }
   }, []);
 
-  const signIn = newAccount => {
+  const signIn = (newAccount = account) => {
     localStorage.setItem(item, JSON.stringify(newAccount));
 
     setAccount(newAccount);
     setIsSignIn(true);
+
+    return <Navigate replace to="/" />
   }
 
   const signOut = () => {

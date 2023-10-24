@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom"
+import { ShoppingCartContext } from "../../Context";
 
 const NavItem = (props) => {
   const { 
@@ -9,13 +11,20 @@ const NavItem = (props) => {
     onSelection 
   } = props;
 
+  const {
+    isSignIn
+  } = useContext(ShoppingCartContext);
+
   return (
-    <li 
-      className={index === 0 ? "font-semibold text-lg" : ""} onClick={() => onSelection()}
+    <li
+      className={index === 0 ? "font-semibold text-lg" : ""}
+      onClick={() => onSelection()}
     >
       <NavLink
-        to={to}
-        className={isActive && index !== 0 ? "underline underline-offset" : undefined}
+        to={isSignIn ? to : "/sign-in"}
+        className={
+          isActive && index !== 0 ? "underline underline-offset" : undefined
+        }
       >
         {link}
       </NavLink>

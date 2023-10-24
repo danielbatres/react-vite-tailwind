@@ -78,7 +78,7 @@ const Navbar = () => {
                 Sign in
               </Link> 
             : <Link 
-                to="/" 
+                to="/sign-in" 
                 onClick={() => signOut()}
               >
                 Sign out
